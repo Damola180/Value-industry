@@ -27,10 +27,12 @@ export default function Header() {
           <div className={`all-navInfos ${navState ? "" : "james"}`}>
             <FaTimes className="custom-icon" onClick={toggleNavState} />
             <div className="nav-links">
-              <Link to="services">Services</Link>
-              <Link>FAQ</Link>
-              <Link>Shipping</Link>
-              <Link>Contact</Link>
+              <Link className="header-link" to="services">
+                Services
+              </Link>
+              <Link className="header-link">FAQ</Link>
+              <Link className="header-link">Shipping</Link>
+              <Link className="header-link">Contact</Link>
             </div>
 
             <div className="nav-btns">

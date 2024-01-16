@@ -1,8 +1,18 @@
 import imgCart from "../assets/cart.svg";
 import searchbtn from "../assets/search-normal.svg";
 import { Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 export default function Cart() {
+  let [searchParams, setSearchParams] = useSearchParams();
+
+  function handleChange(key, value) {
+    setSearchParams((prevParams) => {
+      prevParams.set(key, value);
+      return prevParams;
+    });
+  }
+
   return (
     <div className="navCart">
       <div className="navCart-left">
@@ -17,7 +27,13 @@ export default function Cart() {
       </div>
       <div className="navCart-right">
         <img src={searchbtn} className="placeholder-image" />
-        <input type="text" placeholder="What are you looking for" />
+
+        <input
+          onChange={(event) => handleChange("type", event.target.value)}
+          type="text"
+          placeholder="What are you looking for"
+          value={searchParams.get("type")}
+        />
 
         <button>
           <img src={imgCart} alt="" />
