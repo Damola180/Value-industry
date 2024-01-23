@@ -7,7 +7,6 @@ import { useSearchParams } from "react-router-dom";
 export default function Boxfilter() {
   let [searchParams, setSearchParams] = useSearchParams();
   // state for handleRange
-  const [selectedValue, setSelectedValue] = React.useState(0);
   const [dropdowns, setDropdowns] = React.useState({
     dropdown1: false,
     dropdown2: false,
@@ -107,12 +106,10 @@ export default function Boxfilter() {
         return prevParams;
       });
     }
-    setSelectedValue(value);
   };
 
   // function to clearfilter
   function clearFilter(filter, priceFilter, deliveryFilter) {
-    setSelectedValue(0);
     setSearchParams((prevParams) => {
       prevParams.delete(filter);
       prevParams.delete(priceFilter);
@@ -126,6 +123,8 @@ export default function Boxfilter() {
   const filterValues = searchParams.getAll("filter");
 
   const deliveryFilterValues = searchParams.getAll("deliveryFilter");
+
+  // use effect for price range
 
   // the whole boxfilter
   return (
@@ -192,7 +191,7 @@ export default function Boxfilter() {
 
               <form className={dropdowns.dropdown2 ? "show-form" : "each-form"}>
                 <label style={{ marginBottom: "10px" }}>
-                  greater/= ${selectedValue}
+                  greater/= ${searchParams.get("priceFilter")}
                 </label>
                 <input
                   style={{ width: "100%" }}
@@ -201,7 +200,11 @@ export default function Boxfilter() {
                   name="points"
                   min="0"
                   max="500"
-                  value={selectedValue}
+                  value={
+                    searchParams.get("priceFilter")
+                      ? searchParams.get("priceFilter")
+                      : 0
+                  }
                   onChange={(event) => handleRangeChange("priceFilter", event)}
                 />
               </form>

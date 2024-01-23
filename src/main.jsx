@@ -7,6 +7,7 @@ import Layout from "./pages/Layout";
 import Services from "./pages/Services";
 import NavContextProvider from "./context/navContext";
 import ProductDetail from "./product/productDetails";
+import Cart from "./product/pgCart";
 import NotFound from "./pages/NotFound";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path=":id" element={<ProductDetail />} />
+            <Route path="pgcart" element={<Cart />} />
           </Route>
 
           <Route path="services" element={<Services />} />

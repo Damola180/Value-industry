@@ -5,11 +5,20 @@ import { FiAlertCircle } from "react-icons/fi";
 import Outline from "../assets/Outline.svg";
 import { Link } from "react-router-dom";
 
-import { collection, getDocs } from "firebase/firestore";
-
-import { db } from "../config/firebase";
 import { useSearchParams } from "react-router-dom";
+import { NavContext } from "../context/navContext";
 export default function Home() {
+  //  through context
+  const {
+    cartItems,
+    setCartItems,
+    eachProduct,
+    loading,
+    error,
+    buttonState,
+    setbuttonState,
+  } = React.useContext(NavContext);
+
   // setting searchParams state
   let [searchParams, setSearchParams] = useSearchParams();
 
@@ -19,43 +28,6 @@ export default function Home() {
 
   const deliveryFilterValues = searchParams.getAll("deliveryFilter");
   const typeFilter = searchParams.get("type");
-
-  // React state
-  const [eachProduct, seteachProduct] = React.useState([]);
-  const [loading, setLoading] = React.useState(false);
-
-  const [error, setError] = React.useState(null);
-  // getting data from firebase
-  const getProductData = async () => {
-    const querySnapshot = await getDocs(collection(db, "Value-Products"));
-
-    const arrData = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-
-    return arrData;
-  };
-
-  // use effect to set eachProduct state from firebase(getProductData)
-  React.useEffect(() => {
-    async function loadProduct() {
-      setLoading(true);
-      try {
-        const data = await getProductData();
-
-        seteachProduct(data);
-      } catch (err) {
-        console.log(err);
-        console.log("there is an error");
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadProduct();
-  }, []);
 
   // search params filtering
 
@@ -93,6 +65,36 @@ export default function Home() {
       })
     : deliveryOptDisplayedCharacters;
 
+  // add to cart function
+
+  console.log(buttonState);
+  console.log(cartItems);
+
+  function handleAddToCart(product, event, id) {
+    setbuttonState((prev) => {
+      return {
+        ...prev,
+        [id]: !prev[id],
+      };
+    });
+    setCartItems((prevCartItems) => {
+      // Check if the product with the same ID already exists
+      const existingProductIndex = prevCartItems.findIndex(
+        (item) => item.id === product.id
+      );
+
+      if (existingProductIndex !== -1) {
+        // Product with the same ID already exists, remove it
+        const updatedCartItems = [...prevCartItems];
+        updatedCartItems.splice(existingProductIndex, 1);
+        return updatedCartItems;
+      } else {
+        // Product doesn't exist, add it to the cart
+        return [...prevCartItems, product];
+      }
+    });
+  }
+
   // productElements
   const productElements = characterElements.map((eachProduct) => (
     <div key={eachProduct.id} className="each-products">
@@ -106,25 +108,48 @@ export default function Home() {
             <img src={eachProduct.imgUrl} alt="each-tools img" />
           </div>
         </div>
-        <div className="product-info">
-          <h3>{eachProduct.brand.toUpperCase()}</h3>
-
-          <div>
-            <p>
-              {eachProduct.productName.charAt(0).toUpperCase() +
-                eachProduct.productName.slice(1).toLowerCase()}
-            </p>
-
-            <p>
-              ${eachProduct.price} <sup>.00</sup>
-            </p>
-          </div>
-
-          <button>Add to Cart</button>
-        </div>
       </Link>
+      <div className="product-info">
+        <h3>{eachProduct.brand.toUpperCase()}</h3>
+
+        <div>
+          <p>
+            {eachProduct.productName.charAt(0).toUpperCase() +
+              eachProduct.productName.slice(1).toLowerCase()}
+          </p>
+
+          <p>
+            ${eachProduct.price} <sup>.00</sup>
+          </p>
+        </div>
+
+        {buttonState[eachProduct.id] ? (
+          <button
+            style={{
+              cursor: "pointer",
+              color: "white",
+              backgroundColor: "var(--neutral-13, #242526)",
+            }}
+            onClick={(event) =>
+              handleAddToCart(eachProduct, event, eachProduct.id)
+            }
+          >
+            remove from cart
+          </button>
+        ) : (
+          <button
+            style={{ cursor: "pointer" }}
+            onClick={(event) =>
+              handleAddToCart(eachProduct, event, eachProduct.id)
+            }
+          >
+            Add to Cart
+          </button>
+        )}
+      </div>
     </div>
   ));
+
   return (
     <>
       <Cart />
