@@ -9,6 +9,7 @@ import NavContextProvider from "./context/navContext";
 import ProductDetail from "./product/productDetails";
 import Cart from "./product/pgCart";
 import NotFound from "./pages/NotFound";
+import Success from "./product/success";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path=":id" element={<ProductDetail />} />
             <Route path="pgcart" element={<Cart />} />
           </Route>
+          <Route path="successhhd5&0Q!!" element={<Success />} />
 
           <Route path="services" element={<Services />} />
           <Route path="*" element={<NotFound />} />

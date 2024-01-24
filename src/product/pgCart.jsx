@@ -94,6 +94,11 @@ export default function pgCart() {
     0
   );
 
+  function CheckOut() {
+    setCartItems([]);
+    setbuttonState({});
+  }
+
   return cartItems.length === 0 ? (
     <div style={{ textAlign: "center", marginTop: "60px" }}>
       <h3 style={{ marginBottom: "10px" }}>No items in the cart</h3>
@@ -149,10 +154,12 @@ export default function pgCart() {
         <span>${total}</span>
       </div>
       <div className="pgCart-checkout">
-        <button>
-          <MdOutlineShoppingCartCheckout />
-          CheckOut
-        </button>
+        <Link to="/successhhd5&0Q!!" replace>
+          <button onClick={() => CheckOut()}>
+            <MdOutlineShoppingCartCheckout />
+            CheckOut
+          </button>
+        </Link>
       </div>
     </div>
   );
