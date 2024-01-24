@@ -2,7 +2,7 @@ import React from "react";
 import { NavContext } from "../context/navContext";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaChevronRight } from "react-icons/fa";
-import { MdOutlineDelete, MdTextIncrease } from "react-icons/md";
+import { MdOutlineDelete } from "react-icons/md";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import { Link } from "react-router-dom";
 
@@ -18,7 +18,6 @@ export default function pgCart() {
         // Map through cartItems and add quantity property to each item
         const itemsWithQuantity = cartItems.map((item) => ({
           ...item,
-          quantity: 1,
         }));
         // Set the updated cartItems state
         await setCartItems(itemsWithQuantity);
@@ -89,7 +88,7 @@ export default function pgCart() {
     setCartItems(quantityIncrease);
   }
 
-  // total function
+  // total price function
   const total = cartItems.reduce(
     (acc, cartItems) => acc + cartItems.price * cartItems.quantity,
     0

@@ -67,9 +67,6 @@ export default function Home() {
 
   // add to cart function
 
-  console.log(buttonState);
-  console.log(cartItems);
-
   function handleAddToCart(product, event, id) {
     setbuttonState((prev) => {
       return {
@@ -90,10 +87,12 @@ export default function Home() {
         return updatedCartItems;
       } else {
         // Product doesn't exist, add it to the cart
-        return [...prevCartItems, product];
+        return [...prevCartItems, { ...product, quantity: 1 }];
       }
     });
   }
+
+  console.log(cartItems);
 
   // productElements
   const productElements = characterElements.map((eachProduct) => (

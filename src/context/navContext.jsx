@@ -16,20 +16,23 @@ export default function NavProvider({ children }) {
   const [cartItems, setCartItems] = React.useState([]);
   const [buttonState, setbuttonState] = React.useState({});
 
-  // React.useEffect(() => {
-  //   const storedcartItems = localStorage.getItem("mycartItems");
-  //   const storedbuttonState = localStorage.getItem("mybuttonState");
-  //   if (storedcartItems && storedbuttonState) {
-  //     setCartItems(storedcartItems);
-  //     setCartItems(storedbuttonState);
-  //   }
-  // }, []);
+  // Use useEffect to update local storage whenever myData changes
 
-  // // Use useEffect to update local storage whenever myData changes
-  // React.useEffect(() => {
-  //   localStorage.setItem("mycartItems", cartItems);
-  //   localStorage.setItem("mybuttonState", buttonState);
-  // }, [cartItems, buttonState]);
+  // retireve cart from storage
+
+  const stringifycartItemsFromStorage = localStorage.getItem("cartItems");
+  const stringifybuttonStateFromStorage = localStorage.getItem("buttonState");
+  const cartItemsGained = JSON.parse(stringifycartItemsFromStorage);
+
+  const buttonStateGained = JSON.parse(stringifybuttonStateFromStorage);
+
+  React.useEffect(() => {
+    const stringifycartItems = JSON.stringify(cartItems);
+    localStorage.setItem("cartItems", stringifycartItems);
+
+    const stringifyButtonState = JSON.stringify(buttonState);
+    localStorage.setItem("buttonState", stringifyButtonState);
+  }, [cartItems, buttonState]);
 
   // getting data from firebase
   const getProductData = async () => {
@@ -44,6 +47,7 @@ export default function NavProvider({ children }) {
   };
 
   // use effect to set eachProduct state from firebase(getProductData)
+
   React.useEffect(() => {
     async function loadProduct() {
       setLoading(true);
@@ -51,6 +55,8 @@ export default function NavProvider({ children }) {
         const data = await getProductData();
 
         seteachProduct(data);
+        setCartItems(cartItemsGained);
+        setbuttonState(buttonStateGained);
       } catch (err) {
         setError(err);
       } finally {
