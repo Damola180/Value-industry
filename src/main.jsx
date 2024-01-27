@@ -11,6 +11,10 @@ import Cart from "./product/pgCart";
 import NotFound from "./pages/NotFound";
 import Success from "./product/success";
 
+import AdminLayout from "./Admin/AdminLayout";
+import Orders from "./Admin/Orders";
+import AddProduct from "./Admin/AddProduct";
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <NavContextProvider>
@@ -21,6 +25,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <Route path=":id" element={<ProductDetail />} />
             <Route path="pgcart" element={<Cart />} />
           </Route>
+          <Route path="admin" element={<AdminLayout />}>
+            <Route index element={<Orders />} />
+            <Route path="addproduct" element={<AddProduct />} />
+          </Route>
+
           <Route path="successhhd5&0Q!!" element={<Success />} />
 
           <Route path="services" element={<Services />} />

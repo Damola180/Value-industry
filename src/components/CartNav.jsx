@@ -19,7 +19,9 @@ export default function Cart() {
   return (
     <div className="navCart">
       <div className="navCart-left">
-        <button>Admin</button>
+        <Link to="/admin ">
+          <button>Admin</button>
+        </Link>
       </div>
 
       <div className="navCart-middle">

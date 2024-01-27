@@ -591,6 +591,78 @@ form label {
 .MdOutlineDelete {
   font-size: 50px;
 }
+
+.Admin-container {
+  width: 85%;
+  margin: auto;
+  border: 1px solid #e9edf0;
+  border-radius: 20px;
+  min-height: 85vh;
+  padding: 20px;
+}
+.Admin-nav-container {
+  display: flex;
+  align-items: center;
+}
+.admin-head-txt {
+  font-weight: 500;
+  font-size: x-large;
+}
+.admin-img_div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-Nav_Outlet {
+  width: 70%;
+  margin: 50px auto auto auto;
+  padding: 0px;
+  padding-top: 15px;
+  border-top: 3px solid #e9edf0;
+  border-radius: 100px;
+}
+.admin-Nav_Outlet a {
+  margin-left: 30px;
+  text-decoration: none;
+  font-weight: 200;
+}
+
+.admin-Nav_Outlet-content {
+  width: 65%;
+  margin: 35px auto;
+}
+.admin-Nav_Outlet-content form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.admin-Nav_Outlet-content form label {
+  width: 40%;
+  font-weight: 600;
+}
+
+.admin-Nav_Outlet-content form label input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.admin-submit {
+  width: 100%;
+  background-color: #007acc;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
 /* tablet screen sizes */
 /* tablet screen sizes */
 /* tablet screen sizes */
@@ -1090,5 +1162,32 @@ form label {
   }
   .pgCart-total span {
     font-size: 24px;
+  }
+
+  /* adminPage */
+
+  .admin-Nav_Outlet-content {
+    width: 100%;
+    margin: 35px auto;
+  }
+
+  .admin-Nav_Outlet {
+    width: 100%;
+    margin: 50px auto auto auto;
+    padding: 0px;
+    padding-top: 0px;
+    padding-top: 15px;
+    border-top: 3px solid #e9edf0;
+    border-radius: 100px;
+  }
+  .admin-Nav_Outlet-content form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+
+  .admin-Nav_Outlet-content form label {
+    width: 100%;
+    font-weight: 600;
   }
 }
