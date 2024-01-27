@@ -107,7 +107,7 @@ const ProductDetails = () => {
         return updatedCartItems;
       } else {
         // Product doesn't exist, add it to the cart
-        return [...prevCartItems, product];
+        return [...prevCartItems, { ...product, quantity: 1 }];
       }
     });
   }
