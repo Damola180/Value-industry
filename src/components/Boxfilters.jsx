@@ -15,7 +15,7 @@ export default function Boxfilter() {
 
   const brands = [
     "Kobalt",
-    "Irwin Tools",
+
     "Wiss",
     "Moore & Wright",
     "Bosch",
