@@ -14,10 +14,7 @@ export default function Boxfilter() {
   });
 
   const brands = [
-    "3M",
-    "Alemite",
     "Kobalt",
-    "Milwaukee",
     "Irwin Tools",
     "Wiss",
     "Moore & Wright",
